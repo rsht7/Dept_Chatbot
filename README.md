@@ -1,6 +1,6 @@
 # ⚡ Electro ChatBot — PEC Electrical Department Assistant 
 
-A smart, AI-powered chatbot designed to assist students, faculty, and visitors by answering queries related to the Department of Electrical Engineering at PEC University of Technology.
+A smart, AI-powered chatbot designed to assist students, faculty, and visitors by answering queries related to the Department of Electrical Engineering at PEC University of Technology.( The website is under development yet)
 
 ![Chatbot Screenshot](img3bot.png)
 
