@@ -2,7 +2,7 @@
 
 A smart, AI-powered chatbot designed to assist students, faculty, and visitors by answering queries related to the Department of Electrical Engineering at PEC University of Technology.
 
-![Chatbot Screenshot](img2bot.png)
+![Chatbot Screenshot](img3bot.png)
 
 ---
 
