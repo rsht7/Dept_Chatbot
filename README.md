@@ -2,7 +2,7 @@
 
 A smart, AI-powered chatbot designed to assist students, faculty, and visitors by answering queries related to the Department of Electrical Engineering at PEC University of Technology.
 
-![Chatbot Screenshot](assets/chatbot_preview.png)
+![Chatbot Screenshot](img2bot.png)
 
 ---
 
@@ -61,7 +61,9 @@ A smart, AI-powered chatbot designed to assist students, faculty, and visitors b
   - OpenAI API Key
   - Google Generative AI Key (for Gemini)
 
-![Chat Widget](assets/widget_open.png)
-![User Query](assets/user_query_example.png)
+![Chat Widget](img2bot.png)
+![Chat](img4bot.png)
+![Chat](img5bot.png)
+
 
 
