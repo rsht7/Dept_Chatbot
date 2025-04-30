@@ -62,6 +62,8 @@ A smart, AI-powered chatbot designed to assist students, faculty, and visitors b
   - Google Generative AI Key (for Gemini)
 
 ![Chat Widget](img2bot.png)
+![Chat Widget](img3bot.png)
+
 ![Chat](img4bot.png)
 ![Chat](img5bot.png)
 
