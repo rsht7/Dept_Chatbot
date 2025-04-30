@@ -1,0 +1,13 @@
+data/about_dept.txt
+data/all_courses.txt
+data/courses_data.txt
+data/faculty_info_paragraphs.txt
+faiss_index/
+__pycache__/
+data_scrapping_codes/totalfacultyscrapping.py
+data_scrapping_codes/webscrapping_faculty.py
+data_scrapping_codes/withpublications.py
+data_scrapping_codes/withpubs2.py
+.env
+ui.tsx
+major/

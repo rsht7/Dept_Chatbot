@@ -1,0 +1,3 @@
+We have collected 3 datasets which contain information regarding faculties, departmetn and courses respectively.
+They have been collected using web scraping and pdf scrapping and converted into suitable format for conversion to vector embeddings.
+Faiss Vector Datastore has been used to store the vector embeddings for these datasets.
