@@ -10,3 +10,5 @@ data_scrapping_codes/withpubs2.py
 .env
 ui.tsx
 major/
+*.png
+README.md
