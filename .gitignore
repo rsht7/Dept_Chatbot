@@ -2,7 +2,6 @@ data/about_dept.txt
 data/all_courses.txt
 data/courses_data.txt
 data/faculty_info_paragraphs.txt
-faiss_index/
 __pycache__/
 data_scrapping_codes/totalfacultyscrapping.py
 data_scrapping_codes/webscrapping_faculty.py
