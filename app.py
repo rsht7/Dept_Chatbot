@@ -64,7 +64,9 @@ def rate_limited(ip):
 # --- Chat Endpoint ---
 @app.route("/chat", methods=["POST"])
 def chat():
-    ip = request.remote_addr
+    # ip = request.remote_addr
+    ip = request.headers.get("X-Forwarded-For", request.remote_addr).split(",")[0].strip()
+
 
     if rate_limited(ip):
         return jsonify({"error": "You’ve reached your daily usage limit 🔒 Please try again tomorrow."}), 429
