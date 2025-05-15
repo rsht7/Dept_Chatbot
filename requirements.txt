@@ -2,12 +2,18 @@ Flask==3.1.0
 flask-cors==5.0.1
 Flask-Limiter==3.12
 python-dotenv==1.1.0
+
+# LangChain and core packages
 langchain==0.3.24
 langchain-community==0.3.22
 langchain-core==0.3.56
 langchain-openai==0.3.14
 langchain-google-genai==2.1.3
+
+# API clients
 openai==1.76.0
-google-generativeai==0.8.5
-faiss-cpu==1.10.0  # Only if you need CPU version for FAISS
-tiktoken==0.9.0  # Needed for OpenAI token counting
+google-generativeai==0.6.2  # ✅ compatible version
+
+# Vector search and token counting
+faiss-cpu==1.10.0
+tiktoken==0.9.0
