@@ -12,3 +12,4 @@ ui.tsx
 major/
 *.png
 README.md
+apppy_extras.py
