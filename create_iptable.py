@@ -1,5 +1,3 @@
-# create_iptable.py
-
 import psycopg2
 import os
 from dotenv import load_dotenv
@@ -14,15 +12,14 @@ def ensure_table():
             dbname=os.getenv("PG_DB"),
             user=os.getenv("PG_USER"),
             password=os.getenv("PG_PASS"),
-            sslmode="require"  # Required for Railway or cloud DB
+            sslmode="require"
         )
         cur = conn.cursor()
         cur.execute("""
-            CREATE TABLE IF NOT EXISTS rate_limits (
-                ip TEXT NOT NULL,
-                date DATE NOT NULL,
-                count INTEGER NOT NULL,
-                PRIMARY KEY (ip, date)
+            CREATE TABLE IF NOT EXISTS rate_limits_ip (
+                ip TEXT PRIMARY KEY,
+                window_start TIMESTAMP NOT NULL,
+                count INTEGER NOT NULL
             );
         """)
         conn.commit()

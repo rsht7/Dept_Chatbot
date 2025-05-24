@@ -1,9 +1,7 @@
-# app.py
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from chatbot import get_answer
-from datetime import date
+from datetime import datetime, timedelta
 import psycopg2
 import os
 from dotenv import load_dotenv
@@ -13,11 +11,10 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-# --- Config ---
 MAX_INPUT_WORDS = 50
-DAILY_LIMIT = 5  # Max requests per IP per day
+LIMIT = 5
+WINDOW_HOURS = 8
 
-# --- DB Connection ---
 def get_db_connection():
     return psycopg2.connect(
         host=os.getenv("PG_HOST"),
@@ -28,48 +25,40 @@ def get_db_connection():
         sslmode="require"
     )
 
-# --- Rate Limiting ---
 def rate_limited(ip):
-    today = date.today()
+    now = datetime.utcnow()
     conn = get_db_connection()
     cur = conn.cursor()
 
-    cur.execute(
-        "SELECT count FROM rate_limits WHERE ip = %s AND date = %s",
-        (ip, today)
-    )
+    cur.execute("SELECT window_start, count FROM rate_limits WHERE ip = %s", (ip,))
     row = cur.fetchone()
 
     if row:
-        if row[0] >= DAILY_LIMIT:
-            cur.close()
-            conn.close()
-            return True
+        window_start, count = row
+        if now - window_start < timedelta(hours=WINDOW_HOURS):
+            if count >= LIMIT:
+                cur.close()
+                conn.close()
+                return True
+            else:
+                cur.execute("UPDATE rate_limits SET count = count + 1 WHERE ip = %s", (ip,))
         else:
-            cur.execute(
-                "UPDATE rate_limits SET count = count + 1 WHERE ip = %s AND date = %s",
-                (ip, today)
-            )
+            # Window expired → reset
+            cur.execute("UPDATE rate_limits SET window_start = %s, count = 1 WHERE ip = %s", (now, ip))
     else:
-        cur.execute(
-            "INSERT INTO rate_limits (ip, date, count) VALUES (%s, %s, 1)",
-            (ip, today)
-        )
+        cur.execute("INSERT INTO rate_limits (ip, window_start, count) VALUES (%s, %s, 1)", (ip, now))
 
     conn.commit()
     cur.close()
     conn.close()
     return False
 
-# --- Chat Endpoint ---
 @app.route("/chat", methods=["POST"])
 def chat():
-    # ip = request.remote_addr
     ip = request.headers.get("X-Forwarded-For", request.remote_addr).split(",")[0].strip()
 
-
     if rate_limited(ip):
-        return jsonify({"error": "You’ve reached your daily usage limit 🔒 Please try again tomorrow."}), 429
+        return jsonify({"error": f"You’ve reached the 5-request limit in {WINDOW_HOURS} hours 🔒 Please try again later."}), 429
 
     data = request.json
     query = data.get("query", "")
@@ -86,6 +75,5 @@ def chat():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# --- Startup ---
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
