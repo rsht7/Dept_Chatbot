@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from chatbot import get_answer
 from datetime import datetime, timedelta
+from create_iptable import ensure_table
 import psycopg2
 import os
 from dotenv import load_dotenv
@@ -76,4 +77,5 @@ def chat():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
+    ensure_table()  # ✅ Create table if it doesn't exist
     app.run(host="0.0.0.0", port=5000, debug=True)
