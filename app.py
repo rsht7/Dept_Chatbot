@@ -31,7 +31,7 @@ def rate_limited(ip):
     conn = get_db_connection()
     cur = conn.cursor()
 
-    cur.execute("SELECT window_start, count FROM rate_limits WHERE ip = %s", (ip,))
+    cur.execute("SELECT window_start, count FROM rate_limits_ip WHERE ip = %s", (ip,))
     row = cur.fetchone()
 
     if row:
@@ -42,12 +42,12 @@ def rate_limited(ip):
                 conn.close()
                 return True
             else:
-                cur.execute("UPDATE rate_limits SET count = count + 1 WHERE ip = %s", (ip,))
+                cur.execute("UPDATE rate_limits_ip SET count = count + 1 WHERE ip = %s", (ip,))
         else:
             # Window expired → reset
-            cur.execute("UPDATE rate_limits SET window_start = %s, count = 1 WHERE ip = %s", (now, ip))
+            cur.execute("UPDATE rate_limits_ip SET window_start = %s, count = 1 WHERE ip = %s", (now, ip))
     else:
-        cur.execute("INSERT INTO rate_limits (ip, window_start, count) VALUES (%s, %s, 1)", (ip, now))
+        cur.execute("INSERT INTO rate_limits_ip (ip, window_start, count) VALUES (%s, %s, 1)", (ip, now))
 
     conn.commit()
     cur.close()
