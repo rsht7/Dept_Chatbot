@@ -74,9 +74,13 @@ A smart, AI-powered chatbot designed to assist students, faculty, and visitors b
 ![Chat](img4bot.png)
 ![Chat](img5bot.png)
 
-![Chat](mobile-bot1.jpeg)
+
+<div align="center">
+  <img src="mobile-bot1.jpeg" alt="Demo Image" width="300"/>
+</div>
+<!-- ![Chat](mobile-bot1.jpeg)
 ![Chat](mobile-bot2.jpeg)
-![Chat](mobile-bot3.jpeg)
+![Chat](mobile-bot3.jpeg) -->
 
 
 
