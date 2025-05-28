@@ -50,6 +50,13 @@ A smart, AI-powered chatbot designed to assist students, faculty, and visitors b
    - The backend embeds the query, retrieves top matches from FAISS, and sends them with the prompt to Gemini 1.5 Flash.
    - Gemini generates a context-aware response and returns it to the user.
 
+4. **Security & Cost Management**
+
+   - Rate limiting using Flask-Limiter and PostgreSQL: 5 requests per IP per 8 hours.
+
+   - Word limits enforced on user queries and LLM responses.
+
+   - Secrets managed via .env for secure environment control.
 ---
 
 
@@ -66,6 +73,11 @@ A smart, AI-powered chatbot designed to assist students, faculty, and visitors b
 
 ![Chat](img4bot.png)
 ![Chat](img5bot.png)
+
+![Chat](mobile-bot1.jpeg)
+![Chat](mobile-bot2.jpeg)
+![Chat](mobile-bot3.jpeg)
+
 
 
 
